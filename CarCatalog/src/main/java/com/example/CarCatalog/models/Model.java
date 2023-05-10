@@ -1,12 +1,13 @@
 package com.example.CarCatalog.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Model {
@@ -18,7 +19,7 @@ public class Model {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     private Brand brandId;
 
