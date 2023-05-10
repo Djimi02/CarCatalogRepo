@@ -5,9 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
-public class Brand {
+public class Model {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -16,20 +18,16 @@ public class Brand {
     @Column(name = "name", nullable = false)
     private String name;
 
-    public Brand() {
+    @OneToOne
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    private Brand brandId;
+
+    public Model() {
     }
 
-    public Brand(String name) {
+    public Model(String name, Brand brandId) {
         this.name = name;
-    }
-
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.brandId = brandId;
     }
 
     public String getName() {
@@ -38,6 +36,14 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Brand getBrandId() {
+        return this.brandId;
+    }
+
+    public void setBrandId(Brand brandId) {
+        this.brandId = brandId;
     }
 
 }
