@@ -1,5 +1,8 @@
 package com.example.CarCatalog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +24,7 @@ public class Car {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "model_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Model modelId;
 
     @Column(name = "price", nullable = false)
@@ -30,10 +34,12 @@ public class Car {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "transmission_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Transmission transmissionId;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fuel_type_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private FuelType fuelTypeId;
 
     @Column(name = "remarks")
