@@ -1,4 +1,4 @@
-package com.example.CarCatalog.models;
+package com.example.CarCatalog.repositories;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.CarCatalog.models.Car;
 import com.example.CarCatalog.repositories.CarRepository;
 
 @SpringBootTest
