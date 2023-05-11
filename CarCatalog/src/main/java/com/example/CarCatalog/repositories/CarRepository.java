@@ -19,4 +19,8 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     @Query(value = "SELECT remarks FROM car WHERE car.vin_number = ?1", nativeQuery = true)
     Car test2(String str);
+
+    @Query(value = "SELECT c.id, c FROM car c, model m, brand b, fuel_type ft, transmission t " + 
+                "WHERE c.vin_number = :vinNumber OR (c.model_id = m.id AND m.name = :model)", nativeQuery = true)
+    List<Car> sortCars(String vinNumber, String model);
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.CarCatalog.models.Car;
@@ -23,13 +24,28 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping(path = "allcars")
+    @GetMapping(path = "all")
     public List<Car> allCars() {
         List<Car> cars = carRepository.test();
 
         for (Car car : cars) {
             System.out.println("ASD ASD ASD ASD ASDAS DASD ASD");
             System.out.println(car.getModelId().getBrandId().getName());
+        }
+
+        return null;
+    }
+
+    @GetMapping(path = "sort")
+    public List<Car> sortCars(@RequestParam(required = false, name = "vin_number") String vinNumber,
+        @RequestParam(required = false, name = "model") String model) {
+
+        List<Car> cars = carRepository.sortCars(vinNumber, model);
+
+        System.out.println(" I AM HERE ");
+
+        for (Car car : cars) {
+            System.out.println(car.getRemarks() + " " + car.getModelId().getBrandId().getName());
         }
 
         return null;

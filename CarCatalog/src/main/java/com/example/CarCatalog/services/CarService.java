@@ -57,11 +57,12 @@ public class CarService {
         // Check if the given model already exists. If yes then uses the one from db. If not saves the current one.
         Model newModel = null;
         if (model.size() == 0) {
+            car.getModelId().setBrandId(newBrand);
             newModel = modelRepository.save(car.getModelId());
-            newModel.setBrandId(newBrand);
         } else {
             newModel = model.get(0);
         }
+        newModel.setBrandId(newBrand);
         car.setModelId(newModel);
 
         // Check if the given transmission already exists. If yes then uses the one from db. If not saves the current one.
