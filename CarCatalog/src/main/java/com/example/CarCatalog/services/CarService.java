@@ -152,4 +152,12 @@ public class CarService {
             throw new IllegalArgumentException(exceptionMsg);
         }
     }
+
+    public void deleteCar(Long id) {
+        if (!carRepository.existsById(id)) {
+            throw new IllegalArgumentException("Student with id: " + id + " does not exists!");
+        }
+
+        carRepository.deleteById(id);
+    }
 }

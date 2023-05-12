@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,11 +41,16 @@ public class CarController {
         @RequestParam(required = false, name = "reg_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date regDate) {
 
         return carRepository.filter(model, brand, fuelType, tranType, price, regDate);
-        
+
     }
 
     @PostMapping(path = "add")
     public void addCar(@RequestBody Car car) {
         this.carService.saveCar(car);
+    }
+
+    @DeleteMapping(path = "delete")
+    public void deleteCar(@RequestParam(name = "id") Long id) {
+        this.carService.deleteCar(id);
     }
 }
