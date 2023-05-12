@@ -1,5 +1,7 @@
 package com.example.CarCatalog.models;
 
+import java.util.Date;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +29,8 @@ public class Car {
     private Integer price;
 
     // TODO Add date here
+    @Column(name = "reg_date", nullable = false, columnDefinition = "DATE")
+    private Date regDate;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "transmission_id", referencedColumnName = "id", nullable = false)
@@ -42,10 +46,11 @@ public class Car {
     public Car() {
     }
 
-    public Car(String vin_number, Model modelId, Integer price, Transmission transmissionId, FuelType fuelTypeId, String remarks) {
+    public Car(String vin_number, Model modelId, Integer price, Date regDate, Transmission transmissionId, FuelType fuelTypeId, String remarks) {
         this.vin_number = vin_number;
         this.modelId = modelId;
         this.price = price;
+        this.regDate = regDate;
         this.transmissionId = transmissionId;
         this.fuelTypeId = fuelTypeId;
         this.remarks = remarks;
@@ -97,6 +102,14 @@ public class Car {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public Date getRegDate() {
+        return this.regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
     }
 
 }

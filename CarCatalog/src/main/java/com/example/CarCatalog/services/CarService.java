@@ -149,6 +149,9 @@ public class CarService {
         } else if (car.getFuelTypeId().getName().isEmpty()) {
             emptyField = true;
             exceptionMsg = "Fuel type should be specified!";
+        } else if (car.getRegDate() == null) {
+            emptyField = true;
+            exceptionMsg = "Registration date should be specified!";
         }
 
         if (emptyField) {

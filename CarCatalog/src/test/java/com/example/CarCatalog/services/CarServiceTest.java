@@ -1,5 +1,7 @@
 package com.example.CarCatalog.services;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +23,7 @@ public class CarServiceTest {
         Brand vw = new Brand("vw");
         Model q5 = new Model("q5", vw);
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 10000, null, gas, "new");
+        Car car1 = new Car("vin number", q5, 10000, new Date(), null, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -31,7 +33,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, null, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, null, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -39,7 +41,7 @@ public class CarServiceTest {
     public void checkMandatoryFieldsTest3() {
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", null, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", null, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -48,7 +50,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", null);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -57,7 +59,7 @@ public class CarServiceTest {
         Brand vw = new Brand("vw");
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("hybrid");
-        Car car1 = new Car("vin number", q5, 13, hybrid, null, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, null, "new");
         carService.saveCar(car1);
     }
 
@@ -67,7 +69,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -77,7 +79,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -87,7 +89,7 @@ public class CarServiceTest {
         Model q5 = new Model(null, vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -97,7 +99,7 @@ public class CarServiceTest {
         Model q5 = new Model("", vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -107,7 +109,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission(null);
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -117,7 +119,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("");
         FuelType gas = new FuelType("gas");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -127,7 +129,7 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType(null);
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
         carService.saveCar(car1);
     }
 
@@ -137,7 +139,17 @@ public class CarServiceTest {
         Model q5 = new Model("q5", vw);
         Transmission hybrid = new Transmission("hybrid");
         FuelType gas = new FuelType("");
-        Car car1 = new Car("vin number", q5, 13, hybrid, gas, "new");
+        Car car1 = new Car("vin number", q5, 13, new Date(), hybrid, gas, "new");
+        carService.saveCar(car1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void checkMandatoryFieldsTest14() {
+        Brand vw = new Brand("vw");
+        Model q5 = new Model("q5", vw);
+        Transmission hybrid = new Transmission("hybrid");
+        FuelType gas = new FuelType("gas");
+        Car car1 = new Car("vin number", q5, 13, null, hybrid, gas, "new");
         carService.saveCar(car1);
     }
 }

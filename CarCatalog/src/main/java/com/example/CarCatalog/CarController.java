@@ -1,8 +1,12 @@
 package com.example.CarCatalog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,9 +45,18 @@ public class CarController {
         @RequestParam(required = false, name = "model") String model, 
         @RequestParam(required = false, name = "brand") String brand,
         @RequestParam(required = false, name = "tran_type") String tranType,
-        @RequestParam(required = false, name = "price") Integer price) {
+        @RequestParam(required = false, name = "price") Integer price,
+        @RequestParam(required = false, name = "reg_date") String regDate) {
 
-        List<Car> cars = carRepository.testSort(model, brand, fuelType, tranType, price);
+        Date date1;
+        try {
+            date1 = new SimpleDateFormat("yyyy/MM/dd").parse(regDate);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            date1 = new Date();
+        }
+
+        List<Car> cars = carRepository.testSort(model, brand, fuelType, tranType, price, date1);
 
         System.out.println("SORTED:");
 

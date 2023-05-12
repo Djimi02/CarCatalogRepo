@@ -1,5 +1,7 @@
 package com.example.CarCatalog;
 
+import java.util.Date;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -55,16 +57,16 @@ public class CarCatalogApplication {
 			fuelTypeRepository.save(gas);
 			fuelTypeRepository.save(diesel);
 
-			Car car1 = new Car("vin number", q7, 20000, hybrid, gas, "new1");
+			Car car1 = new Car("vin number", q7, 20000, new Date(), hybrid, gas, "new1");
 			carRepository.save(car1);
 
-			Car car3 = new Car("vin number3", q5, 10300, automatic, gas, "new2");
+			Car car3 = new Car("vin number3", q5, 10300, new Date(), automatic, gas, "new2");
 			carRepository.save(car3);
 
-			Car car2 = new Car("number vin", passat, 10500, hybrid, diesel, "old1");
+			Car car2 = new Car("number vin", passat, 10500, new Date(), hybrid, diesel, "old1");
 			carRepository.save(car2);
 
-			Car car4 = new Car("number vin 4", tiguan, 15000, automatic, diesel, "old2");
+			Car car4 = new Car("number vin 4", tiguan, 15000, new Date(), automatic, diesel, "old2");
 			carRepository.save(car4);
 		};
 	}
