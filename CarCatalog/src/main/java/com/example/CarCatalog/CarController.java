@@ -46,17 +46,9 @@ public class CarController {
         @RequestParam(required = false, name = "brand") String brand,
         @RequestParam(required = false, name = "tran_type") String tranType,
         @RequestParam(required = false, name = "price") Integer price,
-        @RequestParam(required = false, name = "reg_date") String regDate) {
+        @RequestParam(required = false, name = "reg_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date regDate) {
 
-        Date date1;
-        try {
-            date1 = new SimpleDateFormat("yyyy/MM/dd").parse(regDate);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            date1 = new Date();
-        }
-
-        List<Car> cars = carRepository.testSort(model, brand, fuelType, tranType, price, date1);
+        List<Car> cars = carRepository.testSort(model, brand, fuelType, tranType, price, regDate);
 
         System.out.println("SORTED:");
 
