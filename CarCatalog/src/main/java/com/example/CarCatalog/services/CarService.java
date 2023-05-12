@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.CarCatalog.models.Brand;
 import com.example.CarCatalog.models.Car;
@@ -15,6 +16,7 @@ import com.example.CarCatalog.repositories.CarRepository;
 import com.example.CarCatalog.repositories.FuelTypeRepository;
 import com.example.CarCatalog.repositories.ModelRepository;
 import com.example.CarCatalog.repositories.TransmissionRepository;
+
 
 @Service
 public class CarService {
@@ -41,12 +43,23 @@ public class CarService {
 
         checkMandatoryFields(car);
 
+        handleSubObjects(car);
+
+        carRepository.save(car);
+    }
+
+    /**
+     * Checks if the given car's objects (Brand, Model, Transmission, FuelType) already exists.
+     * If yes then uses the one from db. If not saves the current one. 
+     * @param car - car to be checked
+     */
+    private void handleSubObjects(Car car) {
+
         List<Model> model = modelRepository.findByName(car.getModelId().getName());
         List<Brand> brand = brandRepository.findByName(car.getModelId().getBrandId().getName());
         List<Transmission> transmission = transmissionRepository.findByName(car.getTransmissionId().getName());
         List<FuelType> fuelType = fuelTypeRepository.findByName(car.getFuelTypeId().getName());
 
-        // Check if the given brand already exists. If yes then uses the one from db. If not saves the current one.
         Brand newBrand = null;
         if (brand.size() == 0) {
             newBrand = brandRepository.save(car.getModelId().getBrandId());
@@ -54,7 +67,6 @@ public class CarService {
             newBrand = brand.get(0);
         }
 
-        // Check if the given model already exists. If yes then uses the one from db. If not saves the current one.
         Model newModel = null;
         if (model.size() == 0) {
             car.getModelId().setBrandId(newBrand);
@@ -65,7 +77,6 @@ public class CarService {
         newModel.setBrandId(newBrand);
         car.setModelId(newModel);
 
-        // Check if the given transmission already exists. If yes then uses the one from db. If not saves the current one.
         Transmission newTrans = null;
         if (transmission.size() == 0) {
             newTrans = transmissionRepository.save(car.getTransmissionId());
@@ -74,7 +85,6 @@ public class CarService {
         }
         car.setTransmissionId(newTrans);
 
-        // Check if the given fuel type already exists. If yes then uses the one from db. If not saves the current one.
         FuelType newFuel = null;
         if (fuelType.size() == 0) {
             newFuel = fuelTypeRepository.save(car.getFuelTypeId());
@@ -83,7 +93,6 @@ public class CarService {
         }
         car.setFuelTypeId(newFuel);
 
-        carRepository.save(car);
     }
 
     /**
@@ -159,5 +168,28 @@ public class CarService {
         }
 
         carRepository.deleteById(id);
+    }
+
+    /**
+     * Updates car in db.
+     * @param id - id of car to be updated
+     * @param newCar - the new value for the car to be updated
+     */
+    @Transactional
+    public void updateCar(Long id, Car newCar) {
+        if (!carRepository.existsById(id)) {
+            throw new IllegalArgumentException("Student with id: " + id + " does not exists!");
+        }
+
+        Car oldCar = carRepository.findById(id).get();
+        
+        handleSubObjects(newCar);
+
+        oldCar.setPrice(newCar.getPrice());
+        oldCar.setFuelTypeId(newCar.getFuelTypeId());
+        oldCar.setModelId(newCar.getModelId());
+        oldCar.setRegDate(newCar.getRegDate());
+        oldCar.setRemarks(newCar.getRemarks());
+        oldCar.setTransmissionId(newCar.getTransmissionId());
     }
 }
