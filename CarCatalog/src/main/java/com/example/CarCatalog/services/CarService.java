@@ -191,5 +191,6 @@ public class CarService {
         oldCar.setRegDate(newCar.getRegDate());
         oldCar.setRemarks(newCar.getRemarks());
         oldCar.setTransmissionId(newCar.getTransmissionId());
+        oldCar.setVin_number(newCar.getVin_number());
     }
 }
