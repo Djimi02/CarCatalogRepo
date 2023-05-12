@@ -1,0 +1,9 @@
+{
+  "vin_number":"vin num",
+  "modelId": { "name":"q7", "brandId": { "name":"audi" } },
+  "price":30000,
+  "regDate":"2023-01-01",
+  "transmissionId": { "name":"hybrid" },
+  "fuelTypeId": { "name":"diesel" },
+  "remarks":"no remarks"
+}
