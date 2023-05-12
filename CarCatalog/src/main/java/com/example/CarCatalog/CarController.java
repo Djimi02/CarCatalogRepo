@@ -39,18 +39,8 @@ public class CarController {
         @RequestParam(required = false, name = "price") Integer price,
         @RequestParam(required = false, name = "reg_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date regDate) {
 
-        List<Car> cars = carRepository.filter(model, brand, fuelType, tranType, price, regDate);
-
-        System.out.println("SORTED:");
-
-        for (int i = 0; i < cars.size(); i++) {
-            Car car = cars.get(i);
-            System.out.println(car.getRemarks() + " " + car.getModelId().getBrandId().getName() + " " +
-            car.getPrice() + " " + car.getModelId().getName() + " " + car.getVin_number() + " " + 
-            car.getFuelTypeId().getName() + " " + car.getTransmissionId().getName());
-        }
-
-        return cars;
+        return carRepository.filter(model, brand, fuelType, tranType, price, regDate);
+        
     }
 
     @PostMapping(path = "add")

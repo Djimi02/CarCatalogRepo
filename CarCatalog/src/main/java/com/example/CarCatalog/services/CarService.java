@@ -84,12 +84,6 @@ public class CarService {
         car.setFuelTypeId(newFuel);
 
         carRepository.save(car);
-
-        // TODO DELETE LATER
-        System.out.println(car.getRemarks());
-        System.out.println(car.getModelId().getBrandId().getName());
-        System.out.println(car.getFuelTypeId().getName());
-        System.out.println(car.getTransmissionId().getName());
     }
 
     /**

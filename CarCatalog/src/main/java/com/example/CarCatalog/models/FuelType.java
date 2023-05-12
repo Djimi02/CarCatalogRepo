@@ -19,7 +19,6 @@ public class FuelType {
     @Column(name = "name", nullable = false)
     private String name;
 
-
     public FuelType() {
     }
 
