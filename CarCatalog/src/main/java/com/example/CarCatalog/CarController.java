@@ -39,7 +39,7 @@ public class CarController {
         @RequestParam(required = false, name = "price") Integer price,
         @RequestParam(required = false, name = "reg_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date regDate) {
 
-        List<Car> cars = carRepository.testSort(model, brand, fuelType, tranType, price, regDate);
+        List<Car> cars = carRepository.filter(model, brand, fuelType, tranType, price, regDate);
 
         System.out.println("SORTED:");
 

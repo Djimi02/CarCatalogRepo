@@ -22,5 +22,5 @@ public interface CarRepository extends JpaRepository<Car, Long> {
                     "(c.price <= :price OR :price is null) AND " +
                     "(c.reg_date = :regDate OR (cast(:regDate as date) is null)) " +
                     "ORDER BY c.price DESC", nativeQuery = true)
-    List<Car> testSort(String model, String brand, String fuelType, String tranType, Integer price, Date regDate);
+    List<Car> filter(String model, String brand, String fuelType, String tranType, Integer price, Date regDate);
 }
