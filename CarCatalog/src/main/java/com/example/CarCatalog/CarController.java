@@ -1,7 +1,5 @@
 package com.example.CarCatalog;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +28,7 @@ public class CarController {
 
     @GetMapping(path = "all")
     public List<Car> allCars() {
-        List<Car> cars = carRepository.findAll();
-
-        for (Car car : cars) {
-            System.out.println("ASD ASD ASD ASD ASDAS DASD ASD");
-            System.out.println(car.getModelId().getBrandId().getName());
-        }
-
-        return null;
+        return carRepository.findAll();
     }
 
     @GetMapping(path = "sort")
