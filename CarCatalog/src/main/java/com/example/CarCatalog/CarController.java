@@ -26,7 +26,7 @@ public class CarController {
 
     @GetMapping(path = "all")
     public List<Car> allCars() {
-        List<Car> cars = carRepository.test();
+        List<Car> cars = carRepository.findAll();
 
         for (Car car : cars) {
             System.out.println("ASD ASD ASD ASD ASDAS DASD ASD");
@@ -37,23 +37,24 @@ public class CarController {
     }
 
     @GetMapping(path = "sort")
-    public List<Car> sortCars(@RequestParam(required = false, name = "vin_number") String vinNumber,
-        @RequestParam(required = false, name = "model") String model) {
+    public List<Car> sortCars(@RequestParam(required = false, name = "fuel_type") String fuelType,
+        @RequestParam(required = false, name = "model") String model, 
+        @RequestParam(required = false, name = "brand") String brand,
+        @RequestParam(required = false, name = "tran_type") String tranType,
+        @RequestParam(required = false, name = "price") Integer price) {
 
-        List<Car> cars = carRepository.sortCars(vinNumber, model);
+        List<Car> cars = carRepository.testSort(model, brand, fuelType, tranType, price);
 
-        System.out.println(" I AM HERE ");
+        System.out.println("SORTED:");
 
-        for (Car car : cars) {
-            System.out.println(car.getRemarks() + " " + car.getModelId().getBrandId().getName());
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            System.out.println(car.getRemarks() + " " + car.getModelId().getBrandId().getName() + " " +
+            car.getPrice() + " " + car.getModelId().getName() + " " + car.getVin_number() + " " + 
+            car.getFuelTypeId().getName() + " " + car.getTransmissionId().getName());
         }
 
         return null;
-    }
-
-    @GetMapping(path = "onecar")
-    public Car oneCars() {
-        return carRepository.test1("vin num 234");
     }
 
     @PostMapping(path = "add")

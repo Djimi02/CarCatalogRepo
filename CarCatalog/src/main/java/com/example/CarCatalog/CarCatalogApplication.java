@@ -23,46 +23,50 @@ public class CarCatalogApplication {
 		SpringApplication.run(CarCatalogApplication.class, args);
 	}
 
-	// @Bean
-	// public CommandLineRunner initTestData(CarRepository carRepository, BrandRepository brandRepository, FuelTypeRepository fuelTypeRepository, ModelRepository modelRepository, TransmissionRepository transmissionRepository) {
-	// 	return args -> {
+	@Bean
+	public CommandLineRunner initTestData(CarRepository carRepository, BrandRepository brandRepository, FuelTypeRepository fuelTypeRepository, ModelRepository modelRepository, TransmissionRepository transmissionRepository) {
+		return args -> {
 
-	// 		Brand vw = new Brand("vw");
-	// 		Brand audi = new Brand("audi");
+			Brand vw = new Brand("vw");
+			Brand audi = new Brand("audi");
 
-	// 		Model q5 = new Model("q5", audi);
-	// 		Model passat = new Model("passat", vw);
+			Model q5 = new Model("q5", audi);
+			Model q7 = new Model("q7", audi);
+			Model passat = new Model("passat", vw);
+			Model tiguan = new Model("tiguan", vw);
 
-	// 		Transmission hybrid = new Transmission("hybrid");
-	// 		Transmission automatic = new Transmission("automatic");
+			Transmission hybrid = new Transmission("hybrid");
+			Transmission automatic = new Transmission("automatic");
 
-	// 		FuelType gas = new FuelType("gas");
-	// 		FuelType diesel = new FuelType("diesel");
+			FuelType gas = new FuelType("gas");
+			FuelType diesel = new FuelType("diesel");
 
-	// 		brandRepository.save(vw);
-	// 		brandRepository.save(audi);
+			brandRepository.save(vw);
+			brandRepository.save(audi);
 
-	// 		modelRepository.save(q5);
-	// 		modelRepository.save(passat);
+			modelRepository.save(q5);
+			modelRepository.save(passat);
+			modelRepository.save(q7);
+			modelRepository.save(tiguan);
 
-	// 		transmissionRepository.save(hybrid);
-	// 		transmissionRepository.save(automatic);
+			transmissionRepository.save(hybrid);
+			transmissionRepository.save(automatic);
 
-	// 		fuelTypeRepository.save(gas);
-	// 		fuelTypeRepository.save(diesel);
+			fuelTypeRepository.save(gas);
+			fuelTypeRepository.save(diesel);
 
-	// 		Car car1 = new Car("vin number", q5, 10000, hybrid, gas, "new");
-	// 		carRepository.save(car1);
+			Car car1 = new Car("vin number", q7, 20000, hybrid, gas, "new1");
+			carRepository.save(car1);
 
-	// 		Car car3 = new Car("vin number3", q5, 102300, automatic, gas, "new");
-	// 		carRepository.save(car3);
+			Car car3 = new Car("vin number3", q5, 10300, automatic, gas, "new2");
+			carRepository.save(car3);
 
-	// 		Car car2 = new Car("number vin", passat, 10500, hybrid, diesel, "old");
-	// 		carRepository.save(car2);
+			Car car2 = new Car("number vin", passat, 10500, hybrid, diesel, "old1");
+			carRepository.save(car2);
 
-	// 		Car car4 = new Car("number vin 4", passat, 101500, hybrid, diesel, "old");
-	// 		carRepository.save(car4);
-	// 	};
-	// }
+			Car car4 = new Car("number vin 4", tiguan, 15000, automatic, diesel, "old2");
+			carRepository.save(car4);
+		};
+	}
 
 }
