@@ -50,7 +50,7 @@ public class CarController {
             car.getFuelTypeId().getName() + " " + car.getTransmissionId().getName());
         }
 
-        return null;
+        return cars;
     }
 
     @PostMapping(path = "add")

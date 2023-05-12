@@ -28,7 +28,6 @@ public class Car {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    // TODO Add date here
     @Column(name = "reg_date", nullable = false, columnDefinition = "DATE")
     private Date regDate;
 
@@ -54,6 +53,10 @@ public class Car {
         this.transmissionId = transmissionId;
         this.fuelTypeId = fuelTypeId;
         this.remarks = remarks;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public String getVin_number() {
