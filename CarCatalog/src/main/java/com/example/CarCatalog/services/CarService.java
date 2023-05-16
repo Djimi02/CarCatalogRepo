@@ -181,6 +181,8 @@ public class CarService {
             throw new IllegalArgumentException("Student with id: " + id + " does not exists!");
         }
 
+        checkMandatoryFields(newCar);
+
         Car oldCar = carRepository.findById(id).get();
         
         handleSubObjects(newCar);
